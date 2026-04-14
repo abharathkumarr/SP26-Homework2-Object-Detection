@@ -74,9 +74,14 @@ results/
 *.mp4
 *.avi
 *.mov
+
+# Image files (except docs/images for README visuals)
 *.jpg
 *.jpeg
 *.png
+!docs/images/*.jpg
+!docs/images/*.jpeg
+!docs/images/*.png
 
 # Jupyter
 .ipynb_checkpoints/

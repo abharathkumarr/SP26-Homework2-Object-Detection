@@ -30,7 +30,7 @@
 
 ## 📊 YOUR ACTUAL RESULTS
 
-### Speed Benchmarks (NVIDIA T4 GPU)
+### Speed Benchmarks (NVIDIA A100-SXM4-40GB GPU)
 
 #### YOLOv8n Comparison:
 | Backend | Avg Time (ms) | FPS | Speedup |
@@ -96,7 +96,7 @@
 ### Speed Analysis:
 1. **YOLOv8n vs YOLOv8s:** Both performed similarly (~58 FPS)
    - YOLOv8s slightly faster (59.04 FPS) despite being larger model
-   - Likely due to better optimization on T4 GPU
+   - Likely due to better optimization on A100 GPU
 
 2. **PyTorch vs ONNX:** 
    - PyTorch: 64.54 FPS
@@ -163,7 +163,7 @@
 ## 🚀 Performance Summary
 
 **Speed:** 
-- ✅ 37-64 FPS on NVIDIA T4 GPU
+- ✅ 37-64 FPS on NVIDIA A100-SXM4-40GB GPU
 - ✅ Suitable for real-time applications
 - ✅ Multiple optimization methods tested
 
@@ -230,5 +230,5 @@ You have everything needed:
 
 ---
 
-*Results generated from Google Colab execution on NVIDIA T4 GPU*
+*Results generated from Google Colab execution on NVIDIA A100-SXM4-40GB GPU*
 *Date: April 2026*

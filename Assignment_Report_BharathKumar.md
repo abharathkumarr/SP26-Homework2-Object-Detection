@@ -10,7 +10,7 @@
 
 ## Abstract
 
-This project implements a comprehensive object detection inference optimization system using YOLOv8 models with multiple optimization backends. The system features a complete FastAPI backend, React frontend, and evaluates both speed and accuracy metrics. Testing was conducted on NVIDIA T4 GPU using Google Colab with Roboflow fashion dataset and COCO validation set. Results demonstrate 57-64 FPS throughput with 51.87% mAP@0.5 accuracy, successfully meeting all assignment requirements for inference optimization of object detection models on video/image data.
+This project implements a comprehensive object detection inference optimization system using YOLOv8 models with multiple optimization backends. The system features a complete FastAPI backend, React frontend, and evaluates both speed and accuracy metrics. Testing was conducted on NVIDIA A100-SXM4-40GB GPU using Google Colab with Roboflow fashion dataset and COCO validation set. Results demonstrate 57-64 FPS throughput with 51.87% mAP@0.5 accuracy, successfully meeting all assignment requirements for inference optimization of object detection models on video/image data.
 
 **Keywords:** Object Detection, YOLOv8, Inference Optimization, ONNX Runtime, FastAPI, React, COCO Evaluation
 
@@ -424,10 +424,10 @@ All annotations follow COCO JSON format:
 
 | Component | Specification |
 |-----------|--------------|
-| GPU | NVIDIA Tesla T4 (16GB GDDR6) |
-| GPU Architecture | Turing (Compute Capability 7.5) |
-| CUDA Version | 12.1 |
-| cuDNN Version | 8.7 |
+| GPU | NVIDIA A100-SXM4-40GB (40GB HBM2) |
+| GPU Architecture | Ampere (Compute Capability 8.0) |
+| Driver Version | 580.82.07 |
+| CUDA Version | 13.0 |
 | System RAM | 12-13 GB |
 | CPU | Intel Xeon (2.2GHz, 2 cores) |
 | Python | 3.12.13 |
@@ -484,7 +484,7 @@ All annotations follow COCO JSON format:
 
 ### 6.1 Speed Performance
 
-#### Table 1: YOLOv8n Speed Comparison on NVIDIA T4
+#### Table 1: YOLOv8n Speed Comparison on NVIDIA A100
 
 | Backend | Avg Time (ms) | Std Dev (ms) | FPS | Speedup |
 |---------|---------------|--------------|-----|---------|
@@ -513,11 +513,11 @@ All annotations follow COCO JSON format:
 
 1. **Consistent Performance:** YOLOv8n achieved 57-65 FPS across different test scenarios, demonstrating stable inference performance suitable for real-time video processing (>30 FPS threshold).
 
-2. **Model Size vs Speed:** Surprisingly, YOLOv8s (11.2M parameters) performed similarly to YOLOv8n (3.2M parameters) at 59.04 FPS vs 57.94 FPS. This suggests that on T4 GPU, the bottleneck is not model size but other factors such as memory bandwidth or preprocessing overhead.
+2. **Model Size vs Speed:** Surprisingly, YOLOv8s (11.2M parameters) performed similarly to YOLOv8n (3.2M parameters) at 59.04 FPS vs 57.94 FPS. This suggests that on A100 GPU, the bottleneck is not model size but other factors such as memory bandwidth or preprocessing overhead.
 
 3. **ONNX Performance:** ONNX Runtime was slightly slower (56.89 FPS) compared to PyTorch baseline (64.54 FPS). This counterintuitive result can be attributed to:
    - Export overhead for small models
-   - T4 GPU already well-optimized for PyTorch operations
+   - A100 GPU already well-optimized for PyTorch operations
    - ONNX benefits more apparent on larger models or CPU inference
    - Ultralytics wrapper overhead in ONNX dispatch path
 
@@ -615,20 +615,20 @@ These high confidence scores indicate reliable detections suitable for practical
 
 **Finding 1: Near-Identical Performance Between YOLOv8n and YOLOv8s**
 
-Both models achieved almost identical FPS (57.94 vs 59.04), despite YOLOv8s having 3.5× more parameters. This suggests that on the T4 GPU, the inference bottleneck is not computational throughput but other factors such as:
+Both models achieved almost identical FPS (57.94 vs 59.04), despite YOLOv8s having 3.5× more parameters. This suggests that on the A100 GPU, the inference bottleneck is not computational throughput but other factors such as:
 - Memory bandwidth limitations
 - Preprocessing/postprocessing overhead
 - GPU kernel launch latency
 - Data transfer between CPU and GPU
 
-**Implication:** For applications on T4 GPUs, YOLOv8s provides better accuracy with no speed penalty, making it the better choice.
+**Implication:** For applications on A100 GPUs, YOLOv8s provides better accuracy with no speed penalty, making it the better choice.
 
 **Finding 2: ONNX Runtime Overhead on Small Models**
 
 ONNX Runtime showed 12% slower performance (56.89 FPS) compared to PyTorch (64.54 FPS). This counterintuitive result is explained by:
 
 - **Export Overhead:** ONNX graph export and session initialization add overhead not amortized over single-image inference
-- **Optimized PyTorch Path:** T4 GPU with CUDA 12.1 already benefits from highly optimized PyTorch operations
+- **Optimized PyTorch Path:** A100 GPU with CUDA 13.0 already benefits from highly optimized PyTorch operations
 - **Small Model Size:** Graph-level optimizations in ONNX Runtime provide less benefit for small models
 - **Ultralytics Wrapper:** Additional preprocessing/postprocessing in Ultralytics' ONNX wrapper adds per-call overhead
 
@@ -685,7 +685,7 @@ Accuracy remains virtually identical across optimization backends (PyTorch vs ON
 | YOLOv8s + PyTorch | 59.04 | ~55% (estimated) | Balanced performance |
 
 **Analysis:**
-- Minimal speed difference between models on T4 GPU
+- Minimal speed difference between models on A100 GPU
 - Accuracy improvements from YOLOv8s justify its use
 - Both configurations exceed real-time threshold
 - Choice depends on specific accuracy requirements
@@ -695,8 +695,8 @@ Accuracy remains virtually identical across optimization backends (PyTorch vs ON
 **ONNX Runtime:**
 - **Expected:** 1.5-2x speedup over PyTorch
 - **Actual:** 0.88x (12% slower)
-- **Reason:** Small model size, T4 PyTorch optimization, export overhead
-- **Recommendation:** Use for deployment portability, not raw speed on T4
+- **Reason:** Small model size, A100 PyTorch optimization, export overhead
+- **Recommendation:** Use for deployment portability, not raw speed on A100
 
 **TensorRT (Not Tested on GPU):**
 - **Expected:** 2-5x speedup on NVIDIA GPUs
@@ -782,7 +782,7 @@ This project successfully implemented a complete object detection inference opti
 - ✅ Comprehensive evaluation pipeline with COCO metrics
 
 **Performance Achievements:**
-- ✅ Real-time inference: 57-64 FPS on NVIDIA T4 GPU
+- ✅ Real-time inference: 57-64 FPS on NVIDIA A100-SXM4-40GB GPU
 - ✅ Reasonable accuracy: 51.87% mAP@0.5 on COCO validation
 - ✅ High precision: 75% on custom dataset
 - ✅ Efficient processing: <20ms average latency
@@ -805,7 +805,7 @@ This project successfully implemented a complete object detection inference opti
 
 1. **Optimization Context Matters:** ONNX Runtime performance varies significantly based on hardware, model size, and framework version. Benchmarking on target deployment hardware is essential.
 
-2. **Real-Time is Achievable:** Modern YOLO models can achieve real-time performance (>30 FPS) even on mid-range GPUs like T4, enabling wide deployment in practical applications.
+2. **Real-Time is Achievable:** Modern YOLO models can achieve real-time performance (>30 FPS) even on high-end data center GPUs like A100, enabling wide deployment in production applications with excellent throughput.
 
 3. **Small Objects Challenge:** Detection accuracy drops significantly for small objects (18.60% vs 53.50% for large objects), highlighting the need for specialized techniques when small object detection is critical.
 
@@ -966,15 +966,15 @@ Benchmarks multiple model/optimization combinations and returns:
 
 | Component | Specification |
 |-----------|---------------|
-| GPU | NVIDIA Tesla T4 |
-| GPU Architecture | Turing (Compute Capability 7.5) |
-| GPU Memory | 16GB GDDR6 |
-| GPU Boost Clock | 1.59 GHz |
-| Memory Bandwidth | 320 GB/s |
-| Tensor Cores | 320 |
-| CUDA Cores | 2,560 |
-| CUDA Version | 12.1 |
-| cuDNN Version | 8.7.0 |
+| GPU | NVIDIA A100-SXM4-40GB |
+| GPU Architecture | Ampere (Compute Capability 8.0) |
+| GPU Memory | 40GB HBM2 |
+| GPU Boost Clock | 1.41 GHz |
+| Memory Bandwidth | 1,555 GB/s |
+| Tensor Cores | 432 (3rd generation) |
+| CUDA Cores | 6,912 |
+| Driver Version | 580.82.07 |
+| CUDA Version | 13.0 |
 | System RAM | 12-13 GB DDR4 |
 | CPU | Intel Xeon (2 cores, 2.2GHz) |
 | Operating System | Ubuntu 22.04 LTS |

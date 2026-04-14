@@ -20,7 +20,7 @@ Complete implementation of a production-ready object detection inference optimiz
 
 ## Performance Highlights
 
-### Speed Performance (NVIDIA T4 GPU)
+### Speed Performance (NVIDIA A100-SXM4-40GB GPU)
 - **YOLOv8n PyTorch:** 64.54 FPS (15.44ms avg latency)
 - **YOLOv8n ONNX:** 56.89 FPS (17.58ms avg latency)
 - **YOLOv8s PyTorch:** 59.04 FPS (16.94ms avg latency)
@@ -36,6 +36,18 @@ Complete implementation of a production-ready object detection inference optimiz
 ---
 
 ## Visual Results
+
+### Hardware Configuration
+
+![GPU Information](docs/images/gpu_info.png)
+
+**Computing Environment:**
+- GPU: NVIDIA A100-SXM4-40GB (40GB HBM2)
+- Architecture: Ampere (Compute Capability 8.0)
+- Driver Version: 580.82.07
+- CUDA Version: 13.0
+- Memory Bandwidth: 1,555 GB/s
+- Tensor Cores: 432 (3rd generation)
 
 ### Real-Time Detection Example
 
@@ -59,7 +71,7 @@ Complete implementation of a production-ready object detection inference optimiz
 ![ONNX Benchmark](docs/images/onnx_benchmark.png)
 
 **PyTorch vs ONNX Runtime:**
-- PyTorch: 64.54 FPS (faster on T4 GPU)
+- PyTorch: 64.54 FPS (faster on A100 GPU)
 - ONNX Runtime: 56.89 FPS (0.88x speedup)
 - Demonstrates hardware-specific optimization effects
 
@@ -384,10 +396,10 @@ python evaluate.py \
 - Storage: 10GB
 
 **Recommended (Used in Testing):**
-- GPU: NVIDIA T4 (16GB)
+- GPU: NVIDIA A100-SXM4-40GB (40GB VRAM)
 - RAM: 12GB
-- CUDA: 12.1
-- cuDNN: 8.7
+- Driver Version: 580.82.07
+- CUDA: 13.0
 
 ---
 

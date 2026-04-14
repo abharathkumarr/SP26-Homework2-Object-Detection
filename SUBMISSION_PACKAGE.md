@@ -75,7 +75,7 @@
 
 **Option 1: Google Colab (Recommended)**
 1. Upload `colab_demo.ipynb` to Google Colab
-2. Select GPU runtime (T4 recommended)
+2. Select GPU runtime (A100 or T4 recommended)
 3. Run all cells
 4. Results will be generated automatically
 
@@ -190,11 +190,11 @@ zip -r BharathKumar_HW2_ObjectDetection.zip "SP26 Homework2 Object Detection" \
 
 2. **Dependencies:** All required packages are specified in `requirements.txt` files with exact versions.
 
-3. **Hardware:** Testing was performed on NVIDIA T4 GPU in Google Colab. Results may vary on different hardware.
+3. **Hardware:** Testing was performed on NVIDIA A100-SXM4-40GB GPU in Google Colab. Results may vary on different hardware.
 
 4. **Dataset:** Uses Roboflow public dataset (fashion-assistant-segmentation) for evaluation. No manual annotation required.
 
-5. **Execution Time:** Complete Colab notebook runs in approximately 15-20 minutes with T4 GPU.
+5. **Execution Time:** Complete Colab notebook runs in approximately 15-20 minutes with A100 GPU.
 
 ---
 

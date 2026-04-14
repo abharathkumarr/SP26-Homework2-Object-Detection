@@ -80,7 +80,8 @@ results/
 
 # Jupyter
 .ipynb_checkpoints/
-*.ipynb
+# Exclude colab_demo.ipynb from ignore
+# *.ipynb
 
 # Environment
 .env

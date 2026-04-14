@@ -105,3 +105,11 @@ cache/
 colaboutputs/*.json
 colaboutputs/*.pt
 colaboutputs/*.pth
+
+# BUT allow video and image outputs (evidence of working system)
+!colaboutputs/*.mp4
+!colaboutputs/*.avi
+!colaboutputs/*.jpg
+!colaboutputs/*.jpeg
+!colaboutputs/*.png
+!colaboutputs/*.onnx

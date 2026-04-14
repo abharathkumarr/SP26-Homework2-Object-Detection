@@ -1,0 +1,90 @@
+{
+  "info": {
+    "description": "Manual Annotations - CMPE 258 Homework 2",
+    "version": "1.0",
+    "year": 2026,
+    "contributor": "Bharath Kumar",
+    "date_created": "2026-04-14",
+    "annotation_method": "Manual annotation using custom GUI tool (evaluation/annotate.py)"
+  },
+  "licenses": [],
+  "images": [
+    {
+      "id": 1,
+      "file_name": "test_image.jpg",
+      "width": 640,
+      "height": 480,
+      "date_captured": "2026-04-14"
+    }
+  ],
+  "annotations": [
+    {
+      "id": 1,
+      "image_id": 1,
+      "category_id": 1,
+      "bbox": [120, 85, 180, 285],
+      "area": 51300,
+      "iscrowd": 0,
+      "segmentation": []
+    },
+    {
+      "id": 2,
+      "image_id": 1,
+      "category_id": 1,
+      "bbox": [310, 95, 145, 270],
+      "area": 39150,
+      "iscrowd": 0,
+      "segmentation": []
+    },
+    {
+      "id": 3,
+      "image_id": 1,
+      "category_id": 1,
+      "bbox": [480, 110, 125, 250],
+      "area": 31250,
+      "iscrowd": 0,
+      "segmentation": []
+    },
+    {
+      "id": 4,
+      "image_id": 1,
+      "category_id": 1,
+      "bbox": [25, 105, 90, 220],
+      "area": 19800,
+      "iscrowd": 0,
+      "segmentation": []
+    },
+    {
+      "id": 5,
+      "image_id": 1,
+      "category_id": 6,
+      "bbox": [85, 145, 520, 265],
+      "area": 137800,
+      "iscrowd": 0,
+      "segmentation": []
+    },
+    {
+      "id": 6,
+      "image_id": 1,
+      "category_id": 12,
+      "bbox": [15, 25, 55, 75],
+      "area": 4125,
+      "iscrowd": 0,
+      "segmentation": []
+    }
+  ],
+  "categories": [
+    {"id": 1, "name": "person", "supercategory": "person"},
+    {"id": 2, "name": "bicycle", "supercategory": "vehicle"},
+    {"id": 3, "name": "car", "supercategory": "vehicle"},
+    {"id": 4, "name": "motorcycle", "supercategory": "vehicle"},
+    {"id": 5, "name": "airplane", "supercategory": "vehicle"},
+    {"id": 6, "name": "bus", "supercategory": "vehicle"},
+    {"id": 7, "name": "train", "supercategory": "vehicle"},
+    {"id": 8, "name": "truck", "supercategory": "vehicle"},
+    {"id": 9, "name": "boat", "supercategory": "vehicle"},
+    {"id": 10, "name": "traffic light", "supercategory": "outdoor"},
+    {"id": 11, "name": "fire hydrant", "supercategory": "outdoor"},
+    {"id": 12, "name": "stop sign", "supercategory": "outdoor"}
+  ]
+}

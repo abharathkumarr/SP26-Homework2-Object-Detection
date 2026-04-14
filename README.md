@@ -35,6 +35,72 @@ Complete implementation of a production-ready object detection inference optimiz
 
 ---
 
+## Visual Results
+
+### Real-Time Detection Example
+
+![Detection Result](docs/images/detection_result.png)
+
+**Detected Objects:** 4 persons, 1 bus, 1 stop sign  
+**Processing Speed:** 11.3ms preprocess + 114.9ms inference + 40.9ms postprocess = **37.42 FPS**  
+**High Confidence Scores:** 83-87% for persons, 87% for bus, 76% for stop sign
+
+### Performance Benchmarking
+
+![Benchmark Comparison](docs/images/benchmark_comparison.png)
+
+**YOLOv8n vs YOLOv8s Speed Comparison:**
+- YOLOv8n: 57.94 FPS (17.26ms latency)
+- YOLOv8s: 59.04 FPS (16.94ms latency)
+- Both models achieve near-identical real-time performance
+
+### Optimization Backend Comparison
+
+![ONNX Benchmark](docs/images/onnx_benchmark.png)
+
+**PyTorch vs ONNX Runtime:**
+- PyTorch: 64.54 FPS (faster on T4 GPU)
+- ONNX Runtime: 56.89 FPS (0.88x speedup)
+- Demonstrates hardware-specific optimization effects
+
+### COCO Validation Metrics
+
+![COCO Metrics](docs/images/coco_metrics.png)
+
+**Comprehensive COCO Evaluation:**
+- mAP@0.5: 0.5187 (51.87%)
+- mAP@0.5:0.95: 0.3680 (36.80%)
+- Large objects: 53.50% AP
+- Small objects: 18.60% AP
+
+### Custom Dataset Evaluation
+
+![Evaluation Results](docs/images/evaluation_results.png)
+
+**Fashion Dataset Results:**
+- Precision: 75.00%
+- Recall: 46.15%
+- F1-Score: 57.14%
+- 6 True Positives, 2 False Positives, 7 False Negatives
+
+### Dataset Integration
+
+![Dataset Stats](docs/images/dataset_stats.png)
+
+**Roboflow Dataset:**
+- 12 validation images
+- 13 annotations across 11 fashion categories
+- Automated download and COCO format conversion
+
+![Roboflow Download](docs/images/roboflow_download.png)
+
+**Seamless Integration:**
+- One-click dataset download from Roboflow
+- Automatic organization into training/validation/test splits
+- COCO JSON annotations included
+
+---
+
 ## Quick Start
 
 ### 1. Google Colab (Recommended)
